@@ -1,5 +1,6 @@
 package ucas.iie.rd6.mobileinfo.hardware;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.telephony.TelephonyManager;
@@ -127,16 +129,17 @@ public class HardwareActivity extends AppCompatActivity {
                 linearLayout.addView(textView);
             }
         });
+
         Button bt_battery = findViewById(R.id.bt_battery);
         bt_battery.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 linearLayout.removeAllViews();
                 TextView textView = new TextView(v.getContext());
                 textView.setMovementMethod(ScrollingMovementMethod.getInstance());
                 textView.setTextSize(20);
+
                 Map Battery = BatteryUtils.getBatteryInfo(getApplicationContext());
                 String batteryText = "";
                 for(Object key : Battery.keySet()){

@@ -5,6 +5,7 @@ package ucas.iie.rd6.mobileinfo.hardware;
  */
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -775,14 +776,24 @@ class BatteryUtils{
 
 
 class BandUtils{
+    private static Method sysPropGet;
+    private static Method sysPropSet;
     public static Map<String, String> getVersionInfo(Context context){
         Map<String, String> bandVersionInfo = new HashMap<String,String>();
         String bandVersion = "";
+
         try {
-            Class cl = Class.forName("android.os.SystemProperties");
-            Object invoker = cl.newInstance();
-            Method m = cl.getMethod("get", new Class[] { String.class,String.class });
-            Object bandVersionResult = m.invoke(invoker, new Object[]{"gsm.version.baseband", "no message"});
+            Class<?> S = Class.forName("android.os.SystemProperties");
+            Method M[] = S.getMethods();
+            for (Method m : M) {
+                String n = m.getName();
+                if (n.equals("get")) {
+                    sysPropGet = m;
+                } else if (n.equals("set")) {
+                    sysPropSet = m;
+                }
+            }
+            Object bandVersionResult = sysPropGet.invoke(null,"gsm.version.baseband", "no message");
             bandVersion = (String)bandVersionResult;
             bandVersionInfo.put("基带版本信息: ",bandVersion);
             Log.d("基带版本信息:", bandVersion);
