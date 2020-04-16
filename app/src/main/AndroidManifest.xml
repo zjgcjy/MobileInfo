@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".app.AppInfoActivity">
+
+        </activity>
         <activity
             android:name=".user.UserActivity"
             android:label="User Information">
@@ -25,8 +28,9 @@
             android:name=".BasicActivity"
             android:label="Mobile Information">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
