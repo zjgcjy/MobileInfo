@@ -1,0 +1,4 @@
+#Fri Apr 17 00:00:41 CST 2020
+base.0=/Users/shiyinghao/Desktop/Study/MobileInfo/app/build/intermediates/dex/debug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

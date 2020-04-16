@@ -1,5 +1,7 @@
 package ucas.iie.rd6.mobileinfo.hardware.util;
 
+import ucas.iie.rd6.mobileinfo.hardware.base.BaseBean;
+import ucas.iie.rd6.mobileinfo.hardware.base.BaseData;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -17,48 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-class BaseBean implements Serializable {
-
-    protected JSONObject jsonObject = new JSONObject();
-
-
-    protected JSONObject toJSONObject() {
-        return jsonObject;
-    }
-
-    protected BaseBean() {
-
-    }
-
-    protected String isEmpty(String value) {
-        if (TextUtils.isEmpty(value)) {
-            return BaseData.UNKNOWN_PARAM;
-        }
-        return value;
-    }
-
-    protected String isEmpty(CharSequence value) {
-        if (value == null) {
-            return BaseData.UNKNOWN_PARAM;
-        }
-        return value.toString();
-    }
-
-}
-class BaseData {
-    public static final String UNKNOWN_PARAM = "$unknown";
-    public static class Bluetooth {
-        public static final String BLUETOOTH_ADDRESS = "bluetoothAddress";
-        public static final String IS_ENABLED = "isEnabled";
-        public static final String DEVICE = "device";
-        public static final String PHONE_NAME = "phoneName";
-
-        public static class Device {
-            public static String ADDRESS = "address";
-            public static String NAME = "name";
-        }
-    }
-}
 class BluetoothBean extends BaseBean {
     private static final String TAG = BluetoothBean.class.getSimpleName();
 

@@ -1,0 +1,115 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="ucas.iie.rd6.mobileinfo"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+11-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:5:5-72
+11-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:5:22-69
+12    <uses-permission android:name="android.permission.READ_CONTACTS" />
+12-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:6:5-71
+12-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:6:22-69
+13    <uses-permission android:name="android.permission.READ_SMS" />
+13-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:7:5-67
+13-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:7:22-64
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:8:5-76
+14-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:8:22-73
+15    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+15-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:9:5-75
+15-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:9:22-72
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:10:5-79
+16-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:10:22-76
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:11:5-80
+17-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:11:22-78
+18    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+18-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:12:5-80
+18-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:12:22-77
+19    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+19-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:8:5-76
+19-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:8:22-73
+20    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+20-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:14:5-80
+20-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:14:22-78
+21    <uses-permission android:name="android.permission.INTERNET" />
+21-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:15:5-66
+21-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:15:22-64
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:10:5-79
+22-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:10:22-76
+23
+24    <application
+24-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:18:5-50:19
+25        android:allowBackup="true"
+25-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:19:9-35
+26        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+26-->[androidx.core:core:1.1.0] /Users/shiyinghao/.gradle/caches/transforms-2/files-2.1/da95e0dd41fd0c634661df2a0f122634/core-1.1.0/AndroidManifest.xml:24:18-86
+27        android:debuggable="true"
+28        android:icon="@mipmap/ic_launcher"
+28-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:20:9-43
+29        android:label="@string/app_name"
+29-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:21:9-41
+30        android:roundIcon="@mipmap/ic_launcher_round"
+30-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:22:9-54
+31        android:supportsRtl="true"
+31-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:23:9-35
+32        android:testOnly="true"
+33        android:theme="@style/AppTheme" >
+33-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:24:9-40
+34        <activity
+34-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:25:9-28:20
+35            android:name="ucas.iie.rd6.mobileinfo.app.AppInfoActivity"
+35-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:26:13-48
+36            android:label="Detail Information" >
+36-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:27:13-47
+37        </activity>
+38        <activity
+38-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:29:9-32:20
+39            android:name="ucas.iie.rd6.mobileinfo.user.UserActivity"
+39-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:30:13-46
+40            android:label="User Information" >
+40-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:31:13-45
+41        </activity>
+42        <activity
+42-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:33:9-36:20
+43            android:name="ucas.iie.rd6.mobileinfo.hardware.HardwareActivity"
+43-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:34:13-54
+44            android:label="Hardware Information" >
+44-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:35:13-49
+45        </activity>
+46        <activity
+46-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:37:9-40:20
+47            android:name="ucas.iie.rd6.mobileinfo.app.AppActivity"
+47-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:38:13-44
+48            android:label="App Information" >
+48-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:39:13-44
+49        </activity>
+50        <activity
+50-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:41:9-49:20
+51            android:name="ucas.iie.rd6.mobileinfo.BasicActivity"
+51-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:42:13-42
+52            android:label="Mobile Information" >
+52-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:43:13-47
+53            <intent-filter>
+53-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:44:13-48:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:45:17-69
+54-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:45:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:47:17-77
+56-->/Users/shiyinghao/Desktop/Study/MobileInfo/app/src/main/AndroidManifest.xml:47:27-74
+57            </intent-filter>
+58        </activity>
+59    </application>
+60
+61</manifest>
