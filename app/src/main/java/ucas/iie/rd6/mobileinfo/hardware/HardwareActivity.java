@@ -28,6 +28,7 @@ import ucas.iie.rd6.mobileinfo.R;
 import ucas.iie.rd6.mobileinfo.hardware.util.NetWorkInfo;
 import ucas.iie.rd6.mobileinfo.hardware.util.SensorInfo;
 import ucas.iie.rd6.mobileinfo.hardware.util.BluetoothInfo;
+import ucas.iie.rd6.mobileinfo.hardware.util.CpuInfo;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -102,6 +103,19 @@ public class HardwareActivity extends AppCompatActivity {
             }
         });
 
+        Button bt_cpu = findViewById(R.id.bt_cpu);
+        bt_cpu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayout.removeAllViews();
+                TextView textView = new TextView(v.getContext());
+                textView.setTextSize(20);
+                textView.setText(CpuInfo.getCpuInfo(getApplicationContext()));
+                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                linearLayout.addView(textView);
+            }
+        });
+
         Button bt_others = findViewById(R.id.bt_others);
         bt_others.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +147,8 @@ public class HardwareActivity extends AppCompatActivity {
         Button bt_battery = findViewById(R.id.bt_battery);
         bt_battery.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @SuppressLint("SetTextI18n")
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 linearLayout.removeAllViews();
