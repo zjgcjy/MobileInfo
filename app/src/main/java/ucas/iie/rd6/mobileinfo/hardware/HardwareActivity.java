@@ -143,6 +143,7 @@ public class HardwareActivity extends AppCompatActivity {
                 linearLayout.addView(textView);
             }
         });
+
         Button bt_battery = findViewById(R.id.bt_battery);
         bt_battery.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -154,6 +155,7 @@ public class HardwareActivity extends AppCompatActivity {
                 TextView textView = new TextView(v.getContext());
                 textView.setMovementMethod(ScrollingMovementMethod.getInstance());
                 textView.setTextSize(20);
+
                 Map Battery = BatteryUtils.getBatteryInfo(getApplicationContext());
                 String batteryText = "";
                 for(Object key : Battery.keySet()){

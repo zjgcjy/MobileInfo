@@ -21,11 +21,6 @@ import android.widget.Toast;
 import java.util.Map;
 
 import ucas.iie.rd6.mobileinfo.R;
-import ucas.iie.rd6.mobileinfo.user.Phone;
-import ucas.iie.rd6.mobileinfo.user.Contacts;
-import ucas.iie.rd6.mobileinfo.user.UserSms;
-import ucas.iie.rd6.mobileinfo.user.AudioSetting;
-import ucas.iie.rd6.mobileinfo.user.Alarm;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -59,6 +54,7 @@ public class UserActivity extends AppCompatActivity {
                 linearLayout.addView(textView);
             }
         });
+
         Button bt_contacts = findViewById(R.id.bt_contacts);
         bt_contacts.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -71,8 +67,8 @@ public class UserActivity extends AppCompatActivity {
                     textView.setMovementMethod(ScrollingMovementMethod.getInstance());
                     textView.setTextSize(20);
                     String[] contacts = Contacts.getContacts(getApplicationContext());
-                    String contactsText = "Your Contacts (showing first 3 of "+String.valueOf(contacts.length)+")"+"\n";
-                    for (int i = 0; i < 3 && i < contacts.length; i++) {
+                    String contactsText = "Your Contacts (showing first 10 of "+String.valueOf(contacts.length)+")"+"\n";
+                    for (int i = 0; i < 10 && i < contacts.length; i++) {
                         contactsText = contactsText+contacts[i]+"\n";
                     }
                     textView.setText(contactsText);
