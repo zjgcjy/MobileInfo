@@ -8,19 +8,24 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.os.storage.StorageManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -28,7 +33,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -704,3 +711,100 @@ class NetWorkUtils {
     }
 
 
+class BatteryUtils{
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static Map<String, String> getBatteryInfo(Context context) {
+        BatteryManager mBatteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
+        //充电状态
+        boolean batteryChargeStatus = false;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            batteryChargeStatus = mBatteryManager.isCharging();
+        }
+        String batteryChargeStatusString = "";
+        if (!batteryChargeStatus) {
+            batteryChargeStatusString = "未在充电";
+        } else {
+            batteryChargeStatusString = "充电中";
+        }
+
+        //是否在交流电充电
+        int batteryPluggedAc = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PLUGGED_AC);
+        String batteryPluggedAcString = "";
+        if (batteryPluggedAc == 1) {
+            batteryPluggedAcString = "交流电";
+        } else {
+            batteryPluggedAcString = "~";
+        }
+
+        //是否在USB充电
+        int batterPluggedUSB = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PLUGGED_USB);
+        String batterPluggedUSBString = "";
+        if (batterPluggedUSB == 2) {
+            batterPluggedUSBString = "USB充电";
+        } else {
+            batterPluggedUSBString = "~";
+        }
+
+        //是否在无线充电
+        int batteryPluggedWireless = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PLUGGED_WIRELESS);
+        String batteryPliggedWirelessString = "";
+        if (batteryPluggedWireless == 4) {
+            batteryPliggedWirelessString = "无线充电";
+        } else {
+            batteryPliggedWirelessString = "~";
+        }
+
+        //剩余电量
+        int batteryRemain = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+
+        //电池温度
+        Intent intent = new Intent();
+        int batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
+
+
+        Log.d("电池", batteryChargeStatusString + '\\' + batterPluggedUSBString + '\\' +
+                batteryPliggedWirelessString + '\\' + batteryPluggedAcString + '\\' + batteryRemain + '\\' + batteryTemperature);
+        Map<String, String> BatteryInfo = new HashMap<String, String>();
+        BatteryInfo.put("充电状态:", batteryChargeStatusString);
+        BatteryInfo.put("充电模式:", batterPluggedUSBString + '\\' + batteryPliggedWirelessString + '\\' + batteryPluggedAcString);
+        BatteryInfo.put("剩余电量:", batteryRemain + "%");
+        BatteryInfo.put("电池温度:", String.valueOf(batteryTemperature));
+        return BatteryInfo;
+    }
+}
+
+
+class BandUtils{
+    public static Map<String, String> getVersionInfo(Context context){
+        Map<String, String> bandVersionInfo = new HashMap<String,String>();
+        String bandVersion = "";
+        try {
+            Class cl = Class.forName("android.os.SystemProperties");
+            Object invoker = cl.newInstance();
+            Method m = cl.getMethod("get", new Class[] { String.class,String.class });
+            Object bandVersionResult = m.invoke(invoker, new Object[]{"gsm.version.baseband", "no message"});
+            bandVersion = (String)bandVersionResult;
+            bandVersionInfo.put("基带版本信息: ",bandVersion);
+            Log.d("基带版本信息:", bandVersion);
+            String innnerVerion = "" ;
+
+            if(android.os.Build.DISPLAY .contains(android.os.Build.VERSION.INCREMENTAL)){
+                innnerVerion = android.os.Build.DISPLAY;
+            }else{
+                innnerVerion = android.os.Build.VERSION.INCREMENTAL;
+            }
+            bandVersionInfo.put("内部版本信息:",innnerVerion);
+            Log.d("内部版本信息:", innnerVerion);
+            String osKernalVersion = System.getProperty("os.version");
+            bandVersionInfo.put("Kernel信息:",osKernalVersion);
+            Log.i("Kernel信息:","----Linux Kernal is :"+osKernalVersion);
+
+        }
+        catch (Exception e)
+        {
+            Log.d("getVersionInfo Error", e.toString());
+
+        }
+        return bandVersionInfo;
+    }
+}

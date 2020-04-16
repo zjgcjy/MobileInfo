@@ -30,6 +30,21 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/bt_battery"
+        android:textAllCaps="false"
+        android:text="Battery"
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_band"
+        android:textAllCaps="false"
+        android:text="Band"
+        android:textSize="20sp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/bt_rt_sensor"
         android:textAllCaps="false"
         android:text="Real-time Sensor"
