@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -122,6 +123,48 @@ public class HardwareActivity extends AppCompatActivity {
                 else {
                     ActivityCompat.requestPermissions(HardwareActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
                 }
+                //textView.setText("*******************test for others*************************");
+                linearLayout.addView(textView);
+            }
+        });
+        Button bt_battery = findViewById(R.id.bt_battery);
+        bt_battery.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                linearLayout.removeAllViews();
+                TextView textView = new TextView(v.getContext());
+                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                textView.setTextSize(20);
+                Map Battery = BatteryUtils.getBatteryInfo(getApplicationContext());
+                String batteryText = "";
+                for(Object key : Battery.keySet()){
+                    batteryText = batteryText+key.toString()+Battery.get(key)+"\n";
+                }
+                textView.setText(batteryText);
+                //textView.setText("*******************test for others*************************");
+                linearLayout.addView(textView);
+            }
+        });
+
+
+        Button bt_band = findViewById(R.id.bt_band);
+        bt_band.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                linearLayout.removeAllViews();
+                TextView textView = new TextView(v.getContext());
+                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                textView.setTextSize(20);
+                Map Band = BandUtils.getVersionInfo(getApplicationContext());
+                String bandText = "";
+                for(Object key : Band.keySet()){
+                    bandText = bandText+key.toString()+Band.get(key)+"\n";
+                }
+                textView.setText(bandText);
                 //textView.setText("*******************test for others*************************");
                 linearLayout.addView(textView);
             }

@@ -1,9 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".user.UserActivity">
+    <Button
+        android:id="@+id/bt_phonenum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PHONENUMBER" />
+    <Button
+        android:id="@+id/bt_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contacts" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/bt_shortmsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SMS" />
+    <Button
+        android:id="@+id/bt_calllog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calls" />
+    <Button
+        android:id="@+id/bt_AudioSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AudioSetting" />
+    <Button
+        android:id="@+id/bt_Alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NextAlarm" />
+    <LinearLayout
+        android:id="@+id/ly_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    </LinearLayout>
+</LinearLayout>
