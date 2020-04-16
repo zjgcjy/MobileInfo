@@ -20,6 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".hardware.sensordata"
+            android:label="Real-time Sensor">
+        </activity>
+
+        <activity
             android:name=".app.AppInfoActivity"
             android:label="Detail Information">
         </activity>

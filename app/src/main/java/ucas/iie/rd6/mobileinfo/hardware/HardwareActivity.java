@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -86,6 +87,15 @@ public class HardwareActivity extends AppCompatActivity {
                 else{
                     ActivityCompat.requestPermissions(HardwareActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
                 }
+            }
+        });
+
+        Button bt_rt_sensor = findViewById(R.id.bt_rt_sensor);
+        bt_rt_sensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HardwareActivity.this, sensordata.class);
+                startActivity(intent);
             }
         });
 
