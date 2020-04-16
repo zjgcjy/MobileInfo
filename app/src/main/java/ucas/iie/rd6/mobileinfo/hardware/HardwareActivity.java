@@ -23,6 +23,7 @@ import java.util.Map;
 import ucas.iie.rd6.mobileinfo.R;
 import ucas.iie.rd6.mobileinfo.hardware.util.NetWorkInfo;
 import ucas.iie.rd6.mobileinfo.hardware.util.SensorInfo;
+import ucas.iie.rd6.mobileinfo.hardware.util.BluetoothInfo;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -47,7 +48,7 @@ public class HardwareActivity extends AppCompatActivity {
                 linearLayout.removeAllViews();
                 TextView textView = new TextView(v.getContext());
                 textView.setTextSize(20);
-                textView.setText("*******************test for bluetooth*************************");
+                textView.setText(BluetoothInfo.getbtinfo(getApplicationContext()));
                 textView.setMovementMethod(ScrollingMovementMethod.getInstance());
                 linearLayout.addView(textView);
             }
