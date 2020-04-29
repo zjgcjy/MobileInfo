@@ -1,6 +1,7 @@
 package ucas.iie.rd6.mobileinfo.hardware;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -8,11 +9,14 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Map;
 
+import ucas.iie.rd6.mobileinfo.BasicActivity;
 import ucas.iie.rd6.mobileinfo.R;
 import ucas.iie.rd6.mobileinfo.hardware.util.NetWorkInfo;
 import ucas.iie.rd6.mobileinfo.hardware.util.SensorInfo;
@@ -33,13 +38,81 @@ import ucas.iie.rd6.mobileinfo.hardware.util.CpuInfo;
 import static android.Manifest.permission.READ_PHONE_STATE;
 
 public class HardwareActivity extends AppCompatActivity {
+    private static final int NOT_NOTICE = 2;//如果勾选了不再询问
+    private AlertDialog alertDialog;
+    private AlertDialog mDialog;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==NOT_NOTICE){
+            myRequetPermission();//由于不知道是否选择了允许所以需要再次判断
+        }
+    }
+    private void myRequetPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+        }else {
+            Toast.makeText(this,"您已经申请了权限!",Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        if (requestCode == 1) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {//选择了“始终允许”
+                    Toast.makeText(this, "" + "权限" + permissions[i] + "申请成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])){//用户选择了禁止不再询问
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(HardwareActivity.this);
+                        builder.setTitle("permission")
+                                .setMessage("点击允许才可以使用我们的app哦")
+                                .setPositiveButton("去允许", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        if (mDialog != null && mDialog.isShowing()) {
+                                            mDialog.dismiss();
+                                        }
+                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package", getPackageName(), null);//注意就是"package",不用改成自己的包名
+                                        intent.setData(uri);
+                                        startActivityForResult(intent, NOT_NOTICE);
+                                    }
+                                });
+                        mDialog = builder.create();
+                        mDialog.setCanceledOnTouchOutside(false);
+                        mDialog.show();
+
+
+
+                    }else {//选择禁止
+                        AlertDialog.Builder builder = new AlertDialog.Builder(HardwareActivity.this);
+                        builder.setTitle("permission")
+                                .setMessage("点击允许才可以使用我们的app哦")
+                                .setPositiveButton("去允许", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        if (alertDialog != null && alertDialog.isShowing()) {
+                                            alertDialog.dismiss();
+                                        }
+                                        ActivityCompat.requestPermissions(HardwareActivity.this,
+                                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                    }
+                                });
+                        alertDialog = builder.create();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+                    }
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hardware);
         Toast.makeText(this, this.getLocalClassName(), Toast.LENGTH_SHORT).show();
-
+        myRequetPermission();
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -77,20 +150,14 @@ public class HardwareActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 linearLayout.removeAllViews();
-                if (ContextCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-                    /*----------- get sensor list example -----------*/
-                    String showText = "传感器列表:\n";
-                    showText+= SensorInfo.getSensorList(getApplicationContext());
-                    TextView textView = new TextView(v.getContext());
-                    textView.setTextSize(20);
-                    textView.setText(showText);
-                    textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-                    linearLayout.addView(textView);
-                }
-                else{
-                    ActivityCompat.requestPermissions(HardwareActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                }
+                /*----------- get sensor list example -----------*/
+                String showText = "传感器列表:\n";
+                showText+= SensorInfo.getSensorList(getApplicationContext());
+                TextView textView = new TextView(v.getContext());
+                textView.setTextSize(20);
+                textView.setText(showText);
+                textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                linearLayout.addView(textView);
             }
         });
 
